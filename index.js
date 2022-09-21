@@ -1,9 +1,9 @@
 const hSecond = document.querySelector("#hs");
 const seconds = document.querySelector("#s");
 const minutes = document.querySelector("#m");
-const start = document.querySelector("#start");
-const stop = document.querySelector("#stop");
-const reset = document.querySelector("#reset");
+const startW = document.querySelector("#start");
+const stopW = document.querySelector("#stop");
+const resetW = document.querySelector("#reset");
 
 let intervalId;
 
@@ -41,11 +41,11 @@ const startTimer = () => {
     intervalId = setInterval(timer, 10);
 }
 
-start.addEventListener("click", startTimer);
-stop.addEventListener("click", () => {
+startW.addEventListener("click", startTimer);
+stopW.addEventListener("click", () => {
     clearInterval(intervalId);
 });
-reset.addEventListener("click", () => {
+resetW.addEventListener("click", () => {
     hs = s = m = 0; 
     hSecond.textContent = seconds.textContent = minutes.textContent = "00";
 });

@@ -12,7 +12,6 @@ let s = 0;
 let m = 0;
 
 const startTimer = () => {
-    clearInterval(intervalId);
     const timer = () => {
         if (hs < 9) {
             hSecond.textContent = "0" + ++hs;
@@ -21,30 +20,29 @@ const startTimer = () => {
         }
         if (hs === 100) {
             hSecond.textContent = "00";
+            hs = 0;
             if (s < 9) {
                 seconds.textContent = "0" + ++s;
             } else {
                 seconds.textContent = ++s;
             }
-            hs = 0;
         }
         if (s === 60) {
             seconds.textContent = "00";
+            s = 0;
             if (m < 9) {
                 minutes.textContent = "0" + ++m;
             } else {
                 minutes.textContent = ++m;
             }
-            s = 0;
         }
     }
+    clearInterval(intervalId);
     intervalId = setInterval(timer, 10);
 }
 
 startW.addEventListener("click", startTimer);
-stopW.addEventListener("click", () => {
-    clearInterval(intervalId);
-});
+stopW.addEventListener("click", () => clearInterval(intervalId));
 resetW.addEventListener("click", () => {
     hs = s = m = 0; 
     hSecond.textContent = seconds.textContent = minutes.textContent = "00";

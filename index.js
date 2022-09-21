@@ -1,39 +1,50 @@
-const stopwatch = document.querySelector("#stopwatch");
-const hs = document.querySelector("#hs");
-const s = document.querySelector("#s");
-const m = document.querySelector("#m");
+const hSecond = document.querySelector("#hs");
+const seconds = document.querySelector("#s");
+const minutes = document.querySelector("#m");
 const start = document.querySelector("#start");
 const stop = document.querySelector("#stop");
 const reset = document.querySelector("#reset");
 
 let intervalId;
 
-let i = 0;
-let j = 0;
+let hs = 0;
+let s = 0;
+let m = 0;
+
 const startTimer = () => {
     const timer = () => {
-        if (i < 9) {
-            s.textContent = "0" + ++i;
+        if (hs < 9) {
+            hSecond.textContent = "0" + ++hs;
         } else {
-            s.textContent = ++i;
+            hSecond.textContent = ++hs;
         }
-        if (i === 60) {
-            s.textContent = "00";
-            if (j < 9) {
-                m.textContent = "0" + ++j;
+        if (hs === 100) {
+            hSecond.textContent = "00";
+            if (s < 9) {
+                seconds.textContent = "0" + ++s;
             } else {
-                m.textContent = ++j;
+                seconds.textContent = ++s;
             }
-            i = 0;
+            hs = 0;
+        }
+        if (s === 60) {
+            seconds.textContent = "00";
+            if (m < 9) {
+                minutes.textContent = "0" + ++m;
+            } else {
+                minutes.textContent = ++m;
+            }
+            s = 0;
         }
     }
-    intervalId = setInterval(timer, 1000);
+    intervalId = setInterval(timer, 10);
 }
 
 start.addEventListener("click", startTimer);
-
-const stopTimer = () => {
+stop.addEventListener("click", () => {
     clearInterval(intervalId);
-}
-
-stop.addEventListener("click", stopTimer);
+});
+reset.addEventListener("click", () => {
+    hs = s = m = 0; 
+    hSecond.textContent = seconds.textContent = minutes.textContent = "00";
+});

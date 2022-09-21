@@ -12,6 +12,7 @@ let s = 0;
 let m = 0;
 
 const startTimer = () => {
+    clearInterval(intervalId);
     const timer = () => {
         if (hs < 9) {
             hSecond.textContent = "0" + ++hs;

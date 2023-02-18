@@ -1,12 +1,6 @@
-const hs = document.querySelector("#hs");
-const s = document.querySelector("#s");
-const m = document.querySelector("#m");
-const startW = document.querySelector("#start");
-const stopW = document.querySelector("#stop");
-const resetW = document.querySelector("#reset");
-
-let intervalId;
+const $ = query => document.querySelector(query);
 const array = [0, 0, 0];
+let intervalId;
 
 const displayTime = (timeUnit, i) => {
     if (array[i] < 9) {
@@ -16,26 +10,26 @@ const displayTime = (timeUnit, i) => {
     }
 }
 const timer = () => {
-    displayTime(hs, 0)
+    displayTime($("#hs"), 0)
     if (array[0] === 100) {
-        hs.textContent = "00";
+        $("#hs").textContent = "00";
         array[0] = 0;
-        displayTime(s, 1)
+        displayTime($("#s"), 1);
     }
     if (array[1] === 60) {
-        s.textContent = "00";
+        $("#s").textContent = "00";
         array[1] = 0;
-        displayTime(m, 2)
+        displayTime($("#m"), 2);
     }
 }
-const startTimer = () => {
-    clearInterval(intervalId);
-    intervalId = setInterval(timer, 10);
-}
-
-startW.addEventListener("click", startTimer);
-stopW.addEventListener("click", () => clearInterval(intervalId));
-resetW.addEventListener("click", () => {
-    array[0] = array[1] = array[2] = 0; 
-    hs.textContent = s.textContent = m.textContent = "00";
+$("#buttons").addEventListener("click", (event) => {
+    if (event.target.id === "start") {
+        clearInterval(intervalId);
+        intervalId = setInterval(timer, 10);
+    } else if (event.target.id === "stop") {
+        clearInterval(intervalId);
+    } else if (event.target.id === "reset") {
+        array[0] = array[1] = array[2] = 0;
+        $("#hs").textContent = $("#s").textContent = $("#m").textContent = "00";
+    }
 });
